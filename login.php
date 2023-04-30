@@ -8,18 +8,34 @@
 
         if(empty($email && $password)){
             $empmsg ='Fil up this field.';
-        }if(!empty($email) && !empty($password)){
+        }
+        if(!empty($email) && !empty($password)){
+
             $query=mysqli_query($conn,"select * from admin_reg where email='$email'");
             if(mysqli_num_rows($query)>0){
                 $row=mysqli_fetch_assoc($query);
-                $verify = password_verify($password,$row['password']);
-                if($verify==1){
+                if($row['usertype'] == 1){
+                    $verify = password_verify($password,$row['password']);
+                    if($verify==1){
+                    
                     header('location:adminpage.php');
                     die();
                 }
                 else{
                         $passmaseg="Please Enter your correct password";
                     }
+                }else{
+                    $verify = password_verify($password,$row['password']);
+                    if($verify==1){
+                    
+                    header('location:userpage.php');
+                    die();
+                }
+                else{
+                        $passmaseg="Please Enter your correct password";
+                    }
+                }
+                
             }
         }
     }
