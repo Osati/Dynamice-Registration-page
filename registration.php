@@ -47,25 +47,24 @@
         <h1>Registration info</h1>
         <div class="row">
             <div class="formboby">
-            <form action="" method='post'>
-                <label for="">Enter Admin Name:</label></br>
-                <input type="text" name="name" id="name" placeholder="Enter name" value="<?php if(isset($_POST['submit'])){echo "$name";}?>"></br>
-                <p><?php if(isset($_POST['submit'])){echo "$empmsg";}?></p>
-                <label for="">Enter Email:</label></br>
-                <input type="email" name="email" id="email" placeholder="Enter email" value="<?php if(isset($_POST['submit'])){echo "$email";}?>"></br>
-                <p><?php if(isset($_POST['submit'])){echo "$empmsg";}?></p>             
-                <label for="">Enter Password:</label></br>
-                <input type="password" name="password" id="password" placeholder="Enter password " value=""></br>
-                <p><?php if(isset($_POST['submit'])){echo "$empmsg";}?></p></br>              
-            
-                <input type="submit" name="submit" id="submit" value="Submit"></br> 
-            </form>
-        </div>
-        <div class="formboby">
-            <img src="images/reg.jpg" alt="registration">
-        </div>
-    </div>
-        
+                <form action="" method='post'>
+                    <label for="">Enter Admin Name:</label></br>
+                    <input type="text" name="name" id="name" placeholder="Enter name" value="<?php if(isset($_POST['submit'])){echo "$name";}?>"></br>
+                    <p><?php if(isset($_POST['submit'])){echo "$empmsg";}?></p>
+                    <label for="">Enter Email:</label></br>
+                    <input type="email" name="email" id="email" placeholder="Enter email" value="<?php if(isset($_POST['submit'])){echo "$email";}?>"></br>
+                    <p><?php if(isset($_POST['submit'])){echo "$empmsg";}?></p>             
+                    <label for="">Enter Password:</label></br>
+                    <input type="password" name="password" id="password" placeholder="Enter password " value=""></br>
+                    <p><?php if(isset($_POST['submit'])){echo "$empmsg";}?></p></br>              
+                
+                    <input type="submit" name="submit" id="submit" value="Submit"></br> 
+                </form>
+            </div>
+            <div class="formboby">
+                <img src="images/reg.jpg" alt="registration">
+            </div>
+        </div> 
     </section>
 </body>
 </html>

@@ -32,7 +32,7 @@
                     die();
                 }
                 else{
-                        $passmaseg="Please Enter your correct password";
+                        $passmaseg="Please Enter correct password";
                     }
                 }
                 
