@@ -76,8 +76,9 @@
 }
 
 /* adminuser css style */
-.header-container .row table tr th{
-    padding: 5px;
-    border: 1px solid black;
-}
 
+.header-container table{
+    width: 80%;
+    margin: auto;
+    padding: auto;
+}
