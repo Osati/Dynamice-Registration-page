@@ -11,9 +11,9 @@ function moderator(id){
   }); 
 }
 // user admin js
-function sup_moder(id){
+function sub_moder(id){
    $.ajax({
-     url:'sup_moderator.php',
+     url:'sub_moderator.php',
      method:'GET',
      data:{
         id:id,

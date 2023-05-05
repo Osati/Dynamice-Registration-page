@@ -30,7 +30,7 @@
                     $verify = password_verify($password,$row['password']);
                     if($verify==1){
                     
-                    header('location:supmoderatorpage.php');
+                    header('location:submoderatorpage.php');
                     die();
                 }
                 else{
