@@ -10,37 +10,37 @@
             $empmsg ='Fil up this field.';
         }
         if(!empty($email) && !empty($password)){
-
+            
             $query=mysqli_query($conn,"select * from admin_reg where email='$email'");
             if(mysqli_num_rows($query)>0){
                 $row=mysqli_fetch_assoc($query);
-                if($row['usertype'] == 1){
+                
+                if($row['usertype'] == "Moderator"){
                     $verify = password_verify($password,$row['password']);
                     if($verify==1){
                     
-                    header('location:adminpage.php');
+                    header('location:moderatorpage.php');
                     die();
                 }
                 else{
-                        $passmaseg="Please Enter your correct password";
+                        $passmaseg="Enter correct password";
                     }
-                }else{
+                }
+                else{
                     $verify = password_verify($password,$row['password']);
                     if($verify==1){
                     
-                    header('location:userpage.php');
+                    header('location:supmoderatorpage.php');
                     die();
                 }
                 else{
-                        $passmaseg="Please Enter correct password";
+                        $passmaseg="Enter correct password";
                     }
                 }
                 
             }
         }
     }
-
-
 ?>
 
 

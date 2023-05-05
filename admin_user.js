@@ -1,11 +1,25 @@
-function admin(){
-    var usertype=$('admin').val();
+function moderator(id){
     $.ajax({
-        url:'adminuser.php',
-        method:'GET',
-        data:{id:id},
-        success:function(data){
-           $("tbody").html(data);
-        }
-     });
+      url:'moderator.php',
+      method:'GET',
+      data:{
+         id:id,
+      },
+      success:function(data){
+         window.location.reload("adminuser.php");
+      }
+  }); 
+}
+// user admin js
+function sup_moder(id){
+   $.ajax({
+     url:'sup_moderator.php',
+     method:'GET',
+     data:{
+        id:id,
+     },
+     success:function(data){
+        window.location.reload("adminuser.php");
+     }
+ }); 
 }

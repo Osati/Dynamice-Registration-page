@@ -9,7 +9,7 @@
 </head>
 <body>
     <section class="header-container">
-        <h1>Wellcome to user page info</h1>
+        <h1>Wellcome to Sup Moderator page</h1>
         
         
         
