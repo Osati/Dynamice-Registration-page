@@ -1,3 +1,24 @@
+<?php
+    require_once "config.php";
+    
+    $mesg ="";
+    if(isset($_POST['submit'])){
+        $submit_otp = $_POST['otp'];
+
+        $verify= "SELECT * FROM admin_reg where otp='$submit_otp'";
+        $query= mysqli_query($conn,$verify);
+        $row=mysqli_fetch_assoc($query);
+
+        if($row){
+            header('location:registration.php');
+            }
+            else{
+                $mesg="Not match your otp number";
+                
+            }
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,11 +36,12 @@
                 <form action="" method='post'>
                     </br>
                     <label for="">Check Your Email id:</label></br></br>
-                    <input type="text" name="otp" id="otp" placeholder="Enter otp" value=""></br></br>
+                    <input type="text" name="otp" id="otp" placeholder="Enter otp" value=""></br>
+                    <p><?php if(isset($_POST['submit'])){echo "$mesg";}?></p></br>
                     <input type="submit" name="submit" id="submit" value="Submit"></br> 
                 </form>
             </div>
-            <div class="formboby"></div>
+            <div class="formboby" style="display:hide;"></div>
         </div>   
     </section>
 </body>

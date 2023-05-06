@@ -18,40 +18,38 @@ require_once "config.php";
 <body>
     <section class="header-container">
         <h1>Registration info</h1>
-        
             <table class="table">
                 <thead>
                     <tr>
                         <th>Id</th>
                         <th>Name</th>
                         <th>Email</th>
-                        <th>usertype</th>
+                        <th>User_type</th>
                         <th>Date & Time</th>
                         <th>User Select</th>
                     </tr>
                 </thead>
                 <tbody>
-                <?php
-                    $sql = "SELECT * FROM admin_reg";
-                    $query=mysqli_query($conn,$sql);
-                    while($dtinfo=mysqli_fetch_assoc($query)){
-                        ?>
-                        <tr>
-                            <td><?php echo $dtinfo['id']?></td>
-                            <td><?php echo $dtinfo['name']?></td>
-                            <td><?php echo $dtinfo['email']?></td>
-                            <td><?php echo $dtinfo['usertype']?></td>
-                            <td><?php echo $dtinfo['time/date']?></td>
-                            <td>
-                                <button onclick="moderator(<?php echo $dtinfo['id'];?>)">admin</button>
-                                <button onclick="sub_moder(<?php echo $dtinfo['id'];?>)">User</button>
-                            </td>
-                        </tr>
-                
                     <?php
-                }
-                ?>   
-            </tbody> 
+                        $sql = "SELECT * FROM admin_reg";
+                        $query=mysqli_query($conn,$sql);
+                        while($dtinfo=mysqli_fetch_assoc($query)){
+                            ?>
+                            <tr>
+                                <td><?php echo $dtinfo['id']?></td>
+                                <td><?php echo $dtinfo['name']?></td>
+                                <td><?php echo $dtinfo['email']?></td>
+                                <td><?php echo $dtinfo['usertype']?></td>
+                                <td><?php echo $dtinfo['time/date']?></td>
+                                <td>
+                                    <button onclick="moderator(<?php echo $dtinfo['id'];?>)">admin</button>
+                                    <button onclick="sub_moder(<?php echo $dtinfo['id'];?>)">User</button>
+                                </td>
+                            </tr>                
+                        <?php
+                        }
+                    ?>   
+                </tbody> 
             </table>      
     </section>
 </body>

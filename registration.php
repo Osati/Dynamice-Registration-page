@@ -9,18 +9,35 @@
 
         if(empty($name && $email && $password)){
             $empmsg = 'Fil up this field.';         
-         }
-         if(!empty($name) && !empty($email) && !empty($password)){
+        }
+        if(!empty($name) && !empty($email) && !empty($password)){
 
-            $insert = "INSERT INTO admin_reg (name,email,password) VALUE('$name','$email','$enpassword')";
+            $insert = "INSERT INTO admin_reg (name,email,password) 
+            VALUE('$name','$email','$enpassword')";
             
             if($conn->query($insert) === true){
-                echo "
-                    <script>
-                    alert('Your Registration is successfully.');
-                    window.location.href='registration.php';
-                    </script>
-                ";
+                if($insert){
+                    $code = rand(000000,999999);
+                    $update = "UPDATE admin_reg SET otp=$code where email='$email'";
+                    $updateresult=mysqli_query($conn,$update);
+    
+                    if($updateresult){
+                        $to_email= $email;
+                        $headline ="Dynamic Registration verification code.";
+                        $body ="Hi,\n Your verification code: $code";
+                        $send = "From :anisurrhaman0133@gmail.com";
+        
+                        if(mail($to_email,$headline,$body,$send)){
+                            $message="We'have send verify code </br>.$email";
+                            $_SESSION['message'] = $message;
+                            header('location:verify.php');
+                         } else {
+                            $error['otp_errors']= "OTP not send your email.";
+                         }
+                        }else{
+                            $error['db_errors']= "Failed while inserting data into database.";
+                    }
+                }
                 
             }else{
                 echo "
@@ -28,7 +45,7 @@
                 ";
             }
             $conn->close();
-         }
+        }
                
     }
 ?>

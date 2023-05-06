@@ -6,7 +6,7 @@ function moderator(id){
          id:id,
       },
       success:function(data){
-         window.location.reload("adminuser.php");
+         window.location.reload("registration_info.php");
       }
   }); 
 }
@@ -19,7 +19,7 @@ function sub_moder(id){
         id:id,
      },
      success:function(data){
-        window.location.reload("adminuser.php");
+        window.location.reload("registration_info.php");
      }
  }); 
 }
