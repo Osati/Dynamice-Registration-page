@@ -25,6 +25,7 @@ require_once "config.php";
                         <th>Name</th>
                         <th>Email</th>
                         <th>User_type</th>
+                        <th>Verify</th>
                         <th>Date & Time</th>
                         <th>User Select</th>
                     </tr>
@@ -40,6 +41,7 @@ require_once "config.php";
                                 <td><?php echo $dtinfo['name']?></td>
                                 <td><?php echo $dtinfo['email']?></td>
                                 <td><?php echo $dtinfo['usertype']?></td>
+                                <td><?php echo $dtinfo['verify']?></td>
                                 <td><?php echo $dtinfo['time/date']?></td>
                                 <td>
                                     <button onclick="moderator(<?php echo $dtinfo['id'];?>)">admin</button>

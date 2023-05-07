@@ -4,13 +4,22 @@
     $mesg ="";
     if(isset($_POST['submit'])){
         $submit_otp = $_POST['otp'];
-
+    
         $verify= "SELECT * FROM admin_reg where otp='$submit_otp'";
         $query= mysqli_query($conn,$verify);
-        $row=mysqli_fetch_assoc($query);
 
-        if($row){
-            header('location:registration.php');
+        if(mysqli_fetch_assoc($query)){
+            $update="UPDATE admin_reg SET verify='Yes' where otp='$submit_otp'";
+            $sql=mysqli_query($conn,$update);
+            if($sql){
+              echo "
+            <script>
+                alert('Your Registration Successfully');
+                window.location.href='registration.php';
+            </script>
+            ";  
+            }
+            
             }
             else{
                 $mesg="Not match your otp number";
@@ -36,6 +45,7 @@
                 <form action="" method='post'>
                     </br>
                     <label for="">Check Your Email id:</label></br></br>
+                    
                     <input type="text" name="otp" id="otp" placeholder="Enter otp" value=""></br>
                     <p><?php if(isset($_POST['submit'])){echo "$mesg";}?></p></br>
                     <input type="submit" name="submit" id="submit" value="Submit"></br> 

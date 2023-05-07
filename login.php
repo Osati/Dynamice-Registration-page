@@ -26,7 +26,7 @@
                         $passmaseg="Enter correct password";
                     }
                 }
-                else{
+                if($row['usertype'] == "Sub_moderator"){
                     $verify = password_verify($password,$row['password']);
                     if($verify==1){
                     

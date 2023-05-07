@@ -1,5 +1,6 @@
 <?php
     require_once "config.php";
+
     $empmsg="";
     if(isset($_POST['submit'])){
         $name = $_POST['name'];
@@ -12,8 +13,8 @@
         }
         if(!empty($name) && !empty($email) && !empty($password)){
 
-            $insert = "INSERT INTO admin_reg (name,email,password) 
-            VALUE('$name','$email','$enpassword')";
+            $insert = "INSERT INTO admin_reg (name,email,password,verify) 
+            VALUE('$name','$email','$enpassword','No')";
             
             if($conn->query($insert) === true){
                 if($insert){
@@ -28,8 +29,7 @@
                         $send = "From :anisurrhaman0133@gmail.com";
         
                         if(mail($to_email,$headline,$body,$send)){
-                            $message="We'have send verify code </br>.$email";
-                            $_SESSION['message'] = $message;
+                            
                             header('location:verify.php');
                          } else {
                             $error['otp_errors']= "OTP not send your email.";
