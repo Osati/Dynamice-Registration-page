@@ -1,4 +1,5 @@
 <?php
+    session_start();
     require_once "config.php";
     $empmsg ="";
     $passmaseg="";
@@ -14,30 +15,34 @@
             $query=mysqli_query($conn,"select * from admin_reg where email='$email'");
             if(mysqli_num_rows($query)>0){
                 $row=mysqli_fetch_assoc($query);
-                
-                if($row['usertype'] == "Moderator"){
-                    $verify = password_verify($password,$row['password']);
-                    if($verify==1){
-                    
-                    header('location:moderatorpage.php');
-                    die();
-                }
-                else{
-                        $passmaseg="Enter correct password";
+                if($row['verify'] == "Yes"){
+
+                    if($row['usertype'] == "Moderator"){
+                        $verify = password_verify($password,$row['password']);
+                        if($verify==1){
+                        
+                        header('location:moderatorpage.php');
+                        die();
                     }
-                }
-                if($row['usertype'] == "Sub_moderator"){
-                    $verify = password_verify($password,$row['password']);
-                    if($verify==1){
-                    
-                    header('location:submoderatorpage.php');
-                    die();
-                }
-                else{
-                        $passmaseg="Enter correct password";
+                    else{
+                            $passmaseg="Enter correct password";
+                        }
                     }
-                }
-                
+                    if($row['usertype'] == "Sub_moderator"){
+                        $verify = password_verify($password,$row['password']);
+                        if($verify==1){
+                        
+                        header('location:submoderatorpage.php');
+                        die();
+                    }
+                    else{
+                            $passmaseg="Enter correct password";
+                        }
+                    }
+                }else{
+                    $_SESSION['email'] = $email;
+                    header('location:otp.php');
+                }   
             }
         }
     }
