@@ -10,9 +10,7 @@
 <body>
     <section class="header-container">
         <h1>Wellcome to Moderator page info</h1>
-        
-        
-        
+            
     </section>
 </body>
 </html>

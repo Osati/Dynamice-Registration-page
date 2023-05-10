@@ -3,6 +3,7 @@
     require_once "config.php";
     $empmsg ="";
     $passmaseg="";
+    $permission_error="";
     if(isset($_POST['submit'])){
         $email = $_POST['email'];
         $password = $_POST['password'];
@@ -16,29 +17,23 @@
             if(mysqli_num_rows($query)>0){
                 $row=mysqli_fetch_assoc($query);
                 if($row['verify'] == "Yes"){
-
+                    $verify = password_verify($password,$row['password']);
+                    if($verify==1){
                     if($row['usertype'] == "Moderator"){
-                        $verify = password_verify($password,$row['password']);
-                        if($verify==1){
-                        
                         header('location:moderatorpage.php');
                         die();
                     }
-                    else{
-                            $passmaseg="Enter correct password";
-                        }
-                    }
                     if($row['usertype'] == "Sub_moderator"){
-                        $verify = password_verify($password,$row['password']);
-                        if($verify==1){
                         
                         header('location:submoderatorpage.php');
                         die();
+                    }else{
+                        $permission_error="Admin permission is`t active!";
                     }
-                    else{
+                    
+                    }else{
                             $passmaseg="Enter correct password";
                         }
-                    }
                 }else{
                     $_SESSION['email'] = $email;
                     header('location:otp.php');
@@ -64,11 +59,12 @@
         <div class="row">
             <div class="formboby">
             <form action="" method='post'>
+                <p style="color:redgray"><?php if(isset($_POST['submit'])){echo $permission_error;}?></p>
                 <label for="">Enter Email Id:</label></br>
-                <input type="email" name="email" id="email" placeholder="Enter email" value="<?php if(isset($_POST['submit'])){echo "$email";}?>"></br>
+                <input type="email" name="email" id="email" placeholder="Enter your email" value="<?php if(isset($_POST['submit'])){echo "$email";}?>"></br>
                 <p><?php if(isset($_POST['submit'])){echo "$empmsg";}?></p>             
                 <label for="">Enter Password:</label></br>
-                <input type="password" name="password" id="password" placeholder="Enter password " value=""></br>
+                <input type="password" name="password" id="password" placeholder="Enter your password" value=""></br>
                 <p><?php if(isset($_POST['submit'])){if(empty($password)){echo $empmsg;}else{echo $passmaseg;}}?></p></br>              
             
                 <input type="submit" name="submit" id="submit" value="Submit"></br> 

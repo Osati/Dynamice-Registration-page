@@ -1,7 +1,7 @@
 <?php
     require_once "config.php";
-    
-    $mesg ="";
+    $otp_error="";
+    $permission_error="";
     if(isset($_POST['submit'])){
         $submit_otp = $_POST['otp'];
     
@@ -12,21 +12,26 @@
             $update="UPDATE admin_reg SET verify='Yes' where otp='$submit_otp'";
             $sql=mysqli_query($conn,$update);
             if($sql){
-              echo "
-            <script>
-                alert('Your Registration Successfully');
-                window.location.href='registration.php';
-            </script>
-            ";  
+                $query=mysqli_query($conn,"select * from admin_reg where otp='$submit_otp'");
+                if(mysqli_num_rows($query)>0){
+                    $row=mysqli_fetch_assoc($query);
+                    if($row['usertype'] == "Moderator"){
+                        
+                        header('location:moderatorpage.php');
+                        die();
+                    }
+                if($row['usertype'] == "Sub_moderator"){
+                    header('location:submoderatorpage.php');
+                    die();
+                }else{
+                    $permission_error="Admin permission is`t active!";
+                }
+            }else{
+                $otp_error="OTP number error!";
             }
-            
-            }
-            else{
-                $mesg="Not match your otp number";
-                
-            }
+        }
     }
-
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,10 +49,10 @@
             <div class="formboby">
                 <form action="" method='post'>
                     </br>
-                    <label for="">Check Your Email id:</label></br></br>
-                    
+                    <label for="">Check Your Email id:</label></br>
+                    <p><?php if(isset($_POST['submit'])){echo $permission_error;}?></p></br>
                     <input type="text" name="otp" id="otp" placeholder="Enter otp" value=""></br>
-                    <p><?php if(isset($_POST['submit'])){echo "$mesg";}?></p></br>
+                    <p><?php if(isset($_POST['submit'])){echo $otp_error;}?></p></br>
                     <input type="submit" name="submit" id="submit" value="Submit"></br> 
                 </form>
             </div>
